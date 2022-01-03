@@ -35,7 +35,14 @@ I keep somehow frying the hotend thermistor port on multiple Einsy rambo boards.
 #### Step 1 - checkout/update source
 *NOTE* You might need to `git clean -dxf` an existing checkout in order to get the build to work right.
 
-#### Step 2 - Apply diff
+#### Step 2 - Set up the firmware variant and modify pin definitions
+
+##### Step 2a: Set the firmware variant
+Set the firmware variant to the correct one.
+
+cp Firmware/variants/
+
+##### Step 2b: Change the pin definitions
 Apply the following diff, swapping TEMP_0_PIN and TEMP_1_PIN. TEMP_0_PIN should be 0, while TEMP_1_PIN should be 1.
 
 ```
@@ -61,9 +68,23 @@ index b3841a59..74de5ea9 100755
  #define TEMP_2_PIN          -1
 ```
 
-#### Step 3
+#### Step 3 - build
 Run `./build.sh`
 
 Resulting bin file is in `lang/firmware.hex`
 
 [firmware]: https://github.com/prusa3d/Prusa-Firmware.git
+
+#### Step 4 - Upload the file
+
+You can do this from the octoprint host. Use `scp` to put it somewhere on octoprint:
+
+```
+scp lang/firmware.hex pi@pruscilla:
+```
+
+Then, use `avrdude` to upload it from the octoprint host:
+
+```
+avrdude -v -p atmega2560 -c wiring -P /dev/ttyACM0 -b 115200 -D -U flash:w:firmware.hex:i
+```
