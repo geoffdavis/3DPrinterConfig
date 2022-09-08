@@ -3,20 +3,20 @@
 ## MPMD
 
 Monoprice MiniDelta v1 2019-era with the higher resolution stepper motors.
-Converted to an SKR Mini E3 V2.0 mainboard
+Converted to an SKR Pico 1.0 with a RPi Zero W
 <br />
 <br />
 
 ### Modifications
 
 * Binder Clip Bed Mod
-* Borosilicate Glass Bed
+* Wham-Bam Flex Build plate
 * Crap catchers on towers
 * Stiffer spring rate extruder
-* Klipper Firmware using stock mainboard
+* Klipper Firmware
 * V6 Clone nozzle with custom effector
-* SKR Mini E3 V2 mainboard
-* Bigtreetech TFT35 control panel
+* SKR Pico 1.0 Main board
+* Bigtreetech TFT35 control panel (WIP, no heades on the Pico)
 
 ### Notes
 
