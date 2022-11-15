@@ -1,4 +1,4 @@
-<img align=left" width=100 src="../docs/images/FYSETC-VORON-2-4-V2-4-350x350x350mm-CoreXY-High-Quality-3D-Printer-Kit.jpg" />
+<img align="left" width=100 src="../docs/images/FYSETC-VORON-2-4-V2-4-350x350x350mm-CoreXY-High-Quality-3D-Printer-Kit.jpg" />
 
 ## voronica
 
