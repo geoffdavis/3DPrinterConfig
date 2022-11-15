@@ -14,7 +14,7 @@ E3D Revo V6
 
 Still being built. Parts all printed on Pruscilla.
 
-[Klipper Spider Config](https://github.com/VoronDesign/Voron-2/blob/Voron2.4/firmware/klipper_configurations/Spider/Voron2_Spider_Config.cfg)
-[Klipper Install and Update Helper](https://github.com/th33xitus/kiauh)
-[FYSETC Voron 2 Repo](https://github.com/FYSETC/FYSETC-Voron-2)
-[FYSETC Kit BOM](https://github.com/FYSETC/FYSETC-Voron-2/blob/main/BOM.md)
+* [Klipper Spider Config](https://github.com/VoronDesign/Voron-2/blob/Voron2.4/firmware/klipper_configurations/Spider/Voron2_Spider_Config.cfg)
+* [Klipper Install and Update Helper](https://github.com/th33xitus/kiauh)
+* [FYSETC Voron 2 Repo](https://github.com/FYSETC/FYSETC-Voron-2)
+* [FYSETC Kit BOM](https://github.com/FYSETC/FYSETC-Voron-2/blob/main/BOM.md)
