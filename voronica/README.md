@@ -20,3 +20,11 @@ Still being built. Parts all printed on Pruscilla.
 * [FYSETC Kit BOM](https://github.com/FYSETC/FYSETC-Voron-2/blob/main/BOM.md)
 * [FYSETC Spider Pinout](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/Spider_V2.2_Pinout.pdf)
 * [Voron Sourcing Guide](https://vorondesign.com/sourcing_guide?model=V2.4)
+
+### Mainboard
+
+![FYSETC Spider 2.2 Mainboard Rear](spider2.2-board-rear.jpeg)
+
+### Mainboard
+
+![FYSETC Spider 2.2 Mainboard Rear](spider2.2-board-rear.jpeg)
