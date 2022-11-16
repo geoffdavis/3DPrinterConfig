@@ -18,3 +18,5 @@ Still being built. Parts all printed on Pruscilla.
 * [Klipper Install and Update Helper](https://github.com/th33xitus/kiauh)
 * [FYSETC Voron 2 Repo](https://github.com/FYSETC/FYSETC-Voron-2)
 * [FYSETC Kit BOM](https://github.com/FYSETC/FYSETC-Voron-2/blob/main/BOM.md)
+* [FYSETC Spider Pinout](https://github.com/FYSETC/FYSETC-SPIDER/blob/main/Spider_V2.2_Pinout.pdf)
+* [Voron Sourcing Guide](https://vorondesign.com/sourcing_guide?model=V2.4)
