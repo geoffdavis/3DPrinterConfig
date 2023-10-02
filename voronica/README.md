@@ -6,11 +6,12 @@ FYSETC Voron 2.4 Kit with 2.4R2 mods applied. Slice Mosquito Magnum hotend, opti
 
 ## Modifications
 
-* Slice Mosquito Magnum.
-* E3D Revo V6 option. 
-* Mellow RP2040 CAN bus toolhead.
+* Slice Mosquito Magnum with Bondtech CHT nozzles
+* Alternate - E3D Revo V6 option
+* Mellow RP2040 CAN bus toolhead
 * [FYSETC CAN-bus Expander for Spider.](https://www.fysetc.com/products/fysetc-canbus-expander-module-for-spider-board)
 * Finger ducting in wiring bay [similar to LDO kit](https://docs.ldomotors.com/en/voron/voron2/wiring_guide_rev_c)
+* Parts-binned filtered AC inlet - Interpower 83510031. I designed a [custom skirt to hold it](STL/Voron%20Power%20Inlet%20-%20Interpower%20Filtered/README.md).
 
 ## Notes
 
@@ -24,9 +25,21 @@ Parts all printed on Pruscilla.
 * [Voron Sourcing Guide](https://vorondesign.com/sourcing_guide?model=V2.4)
 * [Mellow SB2040 install](https://www.teamfdm.com/forums/topic/851-install-canboot-on-sb2040/#comment-5785)
 
-## Mainboard
+## Electronics Bay
+
+Here's the electronics bay as of October of 2023.
+
+![Bottom Electronics Bay with finger ducting](electronics_bay_duct.jpeg)
+
+### Mainboard
+
+FYSETC Spider 2.2
+
+Rear view of the Spider board showing the pin mapping to the MCU:
 
 ![FYSETC Spider 2.2 Mainboard Rear](spider2.2-board-rear.jpeg)
+
+There's a [mapping file of pins to symbolic names](klipper/spider_aliases.cfg) in the klipper configuration.
 
 ## Operations
 
@@ -88,9 +101,15 @@ Board must be in DFU in order to flash.
 
 #### SB2040 Toolhead via CanBoot
 
+This toolhead was originally configured using the CanBoot instructions from this document: [SB2040 and the curious case of disappearing firmware](https://docs.google.com/document/d/1yaRNuQxDxqgijE8YeJ2r9tUZgJZ4tXXjmrAiFyAfsek/edit)
+
+Once installed, the CanBoot firmware rarely, if ever, needs to be updated again.
+
+NOTE: to get the SB2040 into DFU mode, you need to stop klipper first, then power cycle the toolhead. The asiest way to do that at the moment is to pull the fuse in the underside electronics bay.
+
 1. `sudo service klipper stop`
-2. Power cycle toolhead by opening and closing the fuse panel on the bottom.
-3. Find the CAN ID:
+1. Power cycle toolhead by opening and closing the fuse panel on the bottom.
+1. Find the CAN ID:
 
     ```bash
     cd ~/CanBoot
@@ -130,6 +149,8 @@ Board must be in DFU in order to flash.
 1. Start klipper and make sure that the system sees the MCU: `sudo service klipper start`
 
 #### Raspberry Pi host
+
+This MCU lets you trigger relays and other GPIOs. I'm not currently using any of that functionality, but I am using it for the host load average calculations and other side benefits.
 
 1. Stop klipper `sudo service klipper stop`
 1. Perform the build and flash.
