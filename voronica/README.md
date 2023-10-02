@@ -8,8 +8,8 @@ FYSETC Voron 2.4 Kit with 2.4R2 mods applied. Slice Mosquito Magnum hotend, opti
 
 * Slice Mosquito Magnum with Bondtech CHT nozzles
 * Alternate - E3D Revo V6 option
-* Mellow RP2040 CAN bus toolhead
-* [FYSETC CAN-bus Expander for Spider.](https://www.fysetc.com/products/fysetc-canbus-expander-module-for-spider-board)
+* [Mellow RP2040 CAN bus toolhead](CANBUS/SB2040/)
+* [FYSETC CAN-bus Expander for Spider](https://www.fysetc.com/products/fysetc-canbus-expander-module-for-spider-board)
 * Finger ducting in wiring bay [similar to LDO kit](https://docs.ldomotors.com/en/voron/voron2/wiring_guide_rev_c)
 * Parts-binned filtered AC inlet - Interpower 83510031. I designed a [custom skirt to hold it](STL/Voron%20Power%20Inlet%20-%20Interpower%20Filtered/README.md).
 
