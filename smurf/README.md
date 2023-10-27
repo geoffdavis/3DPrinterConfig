@@ -16,7 +16,7 @@ Converted to an SKR Pico 1.0 with a RPi 3
 * Klipper Firmware
 * E3D Revo hotend with custom effector based on [ksihota's MPMD E3D V6 Effector](https://www.thingiverse.com/thing:4855333), modified for Revo micro heatsing
 * SKR Pico 1.0 Main board
-* Waveshare 3.5 inch touchscreen for raspberry pi
+* Waveshare 4.3 inch DSI touchscreen for raspberry pi
 * higher wattage power supply in raised base, [slobrohim's Monoprice Mini Delta Power Supply Base](https://www.thingiverse.com/thing:4786403). Had to attack it with some plastic cutters to get the raspberry pi to fit. Using the Meanwell LRS-150-12 instead of slobrohim's recommended LRS-150-24, as I didn't want to upgrade the heater pad on the bed to 24VDC. It's a small enough printer that I don't see the need to go 24V, and this way I can print off a car battery if I want later.
 * BTT Smart Filament sensor
 * [LED ring light at top of case.](https://www.thingiverse.com/thing:4284397) run off of the SKR Pico Neopixel bus.
