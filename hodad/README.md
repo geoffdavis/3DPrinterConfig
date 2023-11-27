@@ -6,18 +6,20 @@ Running a Revo Voron hotend
 
 ## Modifications
 
-* Daylight on a stick
+* Daylight on a matchstick
+* Revo VORON left over from my 2.4
 * MOSFET board hooked up to BTT Pi to power lighting
-* DS18B one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico
+* DS18B20 one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico
 * Mapleleafmaker's handles
-* Mapleleafmaker's Daylight diffusers
-* MandicReally's Hex Back plat
+* Mapleleafmaker's Daylight on a Matchstick diffusers
+* MandicReally's Hex Back panel
+* Attempt at lighting Kirigami bed gone horribly wrong.
 
 ## Notes
 
-I nuked the Neopixel on the SKR Pico. I have a klipper expander on order to fix this, though it's unnecessary bling solely to light up the bed Neopixel. The Voron V0Display has one built in, and I'm running Daylight not Discosticks for caselighting and thus don't have too many neopixels in this thing.
+I nuked the Neopixel on the SKR Pico. I have a klipper expander on order to fix this, though it's unnecessary bling solely to light up the bed Neopixel. The Voron V0Display has one Neopixel for status built in, and I'm running Matchsticks not Discosticks for case lighting and thus don't have too many neopixels in this thing.
 
-The magnets that ship with the Formbot kit are not strong enough to hold the door closed through all of the foam and plastic between them. I'll have to see if I can find stronger ones in my parts stash.
+The magnets that ship with the Formbot kit are not strong enough to hold the door closed through all of the foam and plastic between them. I had some stronger ones that _just_ barely hold the door closed now.
 
 ## Links
 
