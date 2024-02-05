@@ -35,8 +35,8 @@ See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
 
 ## Links
 
-* Very helpful docs: https://github.com/SrgntBallistic/Formbot-V0
-* Very helpful build log: FIXME
+* [Ballistic Tech's very helpful docs](https://github.com/SrgntBallistic/Formbot-V0)
+* [Helpful build log](https://www.teamfdm.com/forums/topic/2178-my-first-voron-v02r1-formbot-kit/)
 
 ## Procedures
 
