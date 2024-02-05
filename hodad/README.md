@@ -42,7 +42,7 @@ See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
 
 ## Procedures
 
-## Firmware Updates
+### Firmware Updates
 
 See [Firmware Update](docs/Firmware_Update.md) docs for instructions on how to update Klipper on this thing.
 
