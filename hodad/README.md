@@ -37,8 +37,6 @@ See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
 
 * Very helpful docs: https://github.com/SrgntBallistic/Formbot-V0
 * Very helpful build log: FIXME
-* DS18B20 on BigTreeTech Pi: https://gist.github.com/mdvorak/2fccca3fa9f76f5a2e11e567797c76d6
-* One-wire kernel module compilation instructions: https://github.com/pstolarz/w1-gpio-cl#readme
 
 ## Procedures
 

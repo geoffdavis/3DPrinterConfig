@@ -1,5 +1,10 @@
 # BigTreeTech Pi Notes
 
+## Dallas 1-wire
+
+* DS18B20 on BigTreeTech Pi: https://gist.github.com/mdvorak/2fccca3fa9f76f5a2e11e567797c76d6
+* One-wire kernel module compilation instructions: https://github.com/pstolarz/w1-gpio-cl#readme
+
 ## BTT Pi Pins
 
 Overflow sensors are hooked into the BTT Pi 24-pin header
