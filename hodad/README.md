@@ -10,28 +10,26 @@
 
 ## Modifications
 
-* Daylight on a matchstick
-* Revo VORON left over from my 2.4
-* full-width [DIN rail mount][DIN-mount] for BTT Pi, SKR Pico, and MOSFET board
-* MOSFET board hooked up to BTT Pi to power lighting, bodged in place with a single screw to a low-profile DIN clip from the [DIN rail mount][DIN-mount] that I used.
-* DS18B20 one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico
+* EBB36 CAN toolhead
+* Daylight on a matchstick, using Pico hotend heater port
+* Revo VORON with higher watt heater
+* full-width [DIN rail mount][DIN-mount] for Raspberry Pi, SKR Pico, and Mellow Fly UTOC
+* DS18B20 one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico (no longer necessary with EBB36 but it's already installed.)
 * Mapleleafmaker's [Stealth handles][stealth-handles] on the sides
 * loicloic's [Voron V0/V0.1/V0.2 Compact Handles][compact-handles] - single one only, on front of tophat to help open it.
 * Mapleleafmaker's Daylight on a [Matchstick diffusers][matchstick-diffusers]
 * Mapleleafmaker's [Upper Rear Bowden Inlet for BTT SFS 2.0])https://www.printables.com/model/408745-v0-upper-rear-bowden-inlet-urbi)
 * MandicReally's [Voron Hex Mid panel][mr-hex-mid-panel]
-* Attempt at lighting Kirigami bed gone horribly wrong.
-* EBB36 CAN toolhead
 * LDO Orbiter 2.0 extruder with ministealthorbiter toolhead
 * Raspberry Pi 4 instead of BTT Pi
 
 ## Notes
 
-I nuked the Neopixel on the SKR Pico. I have a klipper expander on order to fix this, though it's unnecessary bling solely to light up the bed Neopixel. The Voron V0Display has one Neopixel for status built in, and I'm running Matchsticks not Discosticks for case lighting and thus don't have too many neopixels in this thing.
+I nuked the Neopixel on the SKR Pico, but the digital IO still works. External neopixels seem to work fine.
 
 The magnets that ship with the Formbot kit are not strong enough to hold the door closed through all of the foam and plastic between them. I had some stronger ones that _just_ barely hold the door closed now.
 
-See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
+The BTTPi died - several USB ports are fried, the mini CAN bridge seems to have flaked out. Using a RPi4 now. See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
 
 ## Links
 
