@@ -43,6 +43,30 @@ There's a [mapping file of pins to symbolic names](klipper/spider_aliases.cfg) i
 
 ## Operations
 
+### Toolhead changes
+
+When replacing the hotend, the effective difference between the nozzle probe point and the TAP sensor can change. This was noted when replacing the Printables version of the Mosquito hotend holder with the Bondtech one that Slice recommended.
+
+Do this with the `PROBE_CALIBRATE` command.
+
+### Gantry maintenance
+
+During initial assembly, plain old loctite Blue thread locker was used, but somewhat inconsistently. Several bolts worked their way loose as a result and the gantry got racked a bit, and the Z axis bearings came loose.
+
+The bolts were replaced and VC3 thread-locker (as recommended by Annex Engineering) was applied to all of the bolts in the gantry.
+
+#### De-racking and squaring
+
+Following the procedures detailed in the Voron [V2 Gantry Squaring](https://docs.vorondesign.com/build/mechanical/v2_gantry_squaring.html) documentsion, I worked through reassembling the frame.
+
+One problem noted was that the front idler bolts holding the pulleys were a bit loose, and this was adding mechanical noise. This is the big vertical bolt in the idler. The A side in particular was very loose.
+
+#### Belt tensioning
+
+Fiddling with belt tension is best done with a relative tension gauge, followed by `BELTS_SHAPER_CALIBRATION`
+
+Per notes above, the idler pulley bolts in the front adjustable idlers need to be snug. Otherwise, weird vibrations result that can't be backed out with belt tension.
+
 ### Klipper firmware updates
 
 One of the annoying things about Klipper is that updating the MCUs isn't an easy task. Each MCU has to be compiled individually, and this can clobber your firmware configuration files if you're not careful.
