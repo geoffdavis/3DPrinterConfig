@@ -8,15 +8,23 @@ In the klipper-build directory, I keep some of the menuconfig output for the var
 
 Board must be in DFU in order to flash.
 
+### Step one - stop klipper
 1. `sudo service klipper stop`
-1. Install jumper between BT0 and 3.3V - USE PLASTIC TWEEZERS
-1. Press reset button on right hand side by Pi
+
+### Step two - put Spider board in DFU mode
+
+1. Install jumper between BT0 and 3.3V - USE PLASTIC TWEEZERS or power down printer, or be a hero and use long metal needlenose and try not to short anything.
+![Jumper Closed](../images/spider_dfu_jumputer_closed.jpeg)
+1. Press reset button on right hand side by Pi (below white zip tie in below picture)
+![Reset button](../images/spider_can_adapter_and_reset_button.jpeg)
 1. Verify the spider shows up in `lsusb` output. Should be something like:
 
     ```none
     ~/klipper  ‹master*› $ lsusb | grep DFU
     Bus 001 Device 005: ID 0483:df11 STMicroelectronics STM Device in DFU Mode
     ```
+
+### Step three - build and flash klipper
 
 1. Perform the build and flash.
 
@@ -43,8 +51,12 @@ Board must be in DFU in order to flash.
       * CAN bus speed 1000000 (1Mbit, defaults to 500000)
       * GPIO Pins to set at micro-controller startup: NONE (make sure it's empty)
 
+### Step four - take board out of DFU mode
+
 1. Remove jumper - USE PLASTIC TWEEZERS
-1. Press reset button
+Jumper in open position: ![Jumper open](../images/spider_dfu_jumper_open.jpeg)
+1. Press reset button (below white zip tie in picture)
+![Reset button](../images/spider_can_adapter_and_reset_button.jpeg)
 1. Verify board shows up in `lsusb` output again
 
     ```none
@@ -52,8 +64,11 @@ Board must be in DFU in order to flash.
     Bus 001 Device 008: ID 1d50:606f OpenMoko, Inc. Geschwister Schneider CAN adapter
     ```
 
+### Step five - restart Klipper
+
 1. Start klipper
-1. Get mad because CAN bus is screwey as usual, reboot host like three or four times until it stops complaining about the CAN bus being offline.
+
+NOTE: depending on the state of the USB to CAN adapter, the SB2040
 
 ## SB2040 Toolhead via CanBoot
 
@@ -63,8 +78,18 @@ Once installed, the CanBoot firmware rarely, if ever, needs to be updated again.
 
 NOTE: to get the SB2040 into DFU mode, you need to stop klipper first, then power cycle the toolhead. The asiest way to do that at the moment is to pull the fuse in the underside electronics bay.
 
+### Step One - stop klipper
+
 1. `sudo service klipper stop`
+
+### Step Two - get board into DFU mode
+
 1. Power cycle toolhead by opening and closing the fuse panel on the bottom.
+  Closed fuse: ![SB2040 Fuse](../images/sb2040-fuse-closed.jpeg)
+  Open fuse: ![SB2040 Fuse Open](../images/sb2040-fuse-open.jpeg)
+
+### Step 3 - Build and Flash
+
 1. Find the CAN ID:
 
     ```bash
@@ -79,7 +104,6 @@ NOTE: to get the SB2040 into DFU mode, you need to stop klipper first, then powe
     Found canbus_uuid=f6f9ce8939ef, Application: Klipper
     Total 1 uuids found
     ```
-
 1. Perform the build and flash.
 
     ```bash
@@ -104,13 +128,18 @@ NOTE: to get the SB2040 into DFU mode, you need to stop klipper first, then powe
       * CAN TX gpio number: `5`
       * GPIO pins to set at startup: `gpio24`
 
+### Step 4 - Restart Klipper
 1. Start klipper and make sure that the system sees the MCU: `sudo service klipper start`
 
 ## Raspberry Pi host
 
 This MCU lets you trigger relays and other GPIOs. I'm not currently using any of that functionality, but I am using it for the host load average calculations and other side benefits.
 
+### Step 1 - Stop Klipper
+
 1. Stop klipper `sudo service klipper stop`
+
+### Step 2 - Build and flash
 1. Perform the build and flash.
 
     ```bash
@@ -126,6 +155,8 @@ This MCU lets you trigger relays and other GPIOs. I'm not currently using any of
     a. If the settings get clobbered, use:
 
       * Microcontroller Arch Linux process
+
+### Step 3 - Restart Klipper
 
 1. Start klipper `sudo service klipper start`
 
@@ -207,9 +238,9 @@ make -j4 KCONFIG_CONFIG="${_kc}"
 
 If the settings get clobbered, use:
 
-* Enable extra low-level configuration options
+* **Enable** extra low-level configuration options
 * Micro-controller Architecture: `STMicroelectronics STM32`
-* Bootloader offset: `8KiB bootloader` - NOTE this is different than the Voron default due to katapult!!
+* Bootloader offset: `8KiB bootloader` - *NOTE this is different than the Voron default of `28KiB` due to `katapult` being in place!!*
 * Clock reference: `8 MHz crystal`
 * Communication interface: `USB (on PA11/PA12)`
 * GPIO pins: `!PA14` - Don't forget to set this, the board won't boot otherwise
@@ -218,20 +249,23 @@ If the settings get clobbered, use:
 
 Note that the device must be in bootloader mode per Step 2.
 
-```bash
-# Below command only worked the first time with the deployer.bin
-make flash \
-  KCONFIG_CONFIG="${_kc}" \
-  FLASH_DEVICE=/dev/ttyACM3
-#
-# --or--
-#
-# this worked with the double-press of the reset button
-make flash \
-  KCONFIG_CONFIG="${_kc}" \
-  FLASH_DEVICE=/dev/serial/by-id/usb-katapult_stm32f103xe_30FFDA054E4E353717730551-if00
-```
+1. Run the flash command:
+
+  ```bash
+  # Below command only worked the first time with the deployer.bin
+  make flash \
+    KCONFIG_CONFIG="${_kc}" \
+    FLASH_DEVICE=/dev/ttyACM3
+  #
+  # --or--
+  #
+  # this worked with the double-press of the reset button
+  make flash \
+    KCONFIG_CONFIG="${_kc}" \
+    FLASH_DEVICE=/dev/serial/by-id/usb-katapult_stm32f103xe_30FFDA054E4E353717730551-if00
+  ```
 
 ### Step 5 - restart klipper
 
-1. Start klipper `sudo service klipper start`
+1. Reset the board to get it out of DFU.
+1. Start klipper: `sudo service klipper start`
