@@ -18,7 +18,7 @@
 * Mapleleafmaker's [Stealth handles][stealth-handles] on the sides
 * loicloic's [Voron V0/V0.1/V0.2 Compact Handles][compact-handles] - single one only, on front of tophat to help open it.
 * Mapleleafmaker's Daylight on a [Matchstick diffusers][matchstick-diffusers]
-* Mapleleafmaker's [Upper Rear Bowden Inlet for BTT SFS 2.0])https://www.printables.com/model/408745-v0-upper-rear-bowden-inlet-urbi)
+* Mapleleafmaker's [Upper Rear Bowden Inlet for BTT SFS 2.0](https://www.printables.com/model/408745-v0-upper-rear-bowden-inlet-urbi)
 * MandicReally's [Voron Hex Mid panel][mr-hex-mid-panel]
 * LDO Orbiter 2.0 extruder with ministealthorbiter toolhead
 * Raspberry Pi 4 instead of BTT Pi
