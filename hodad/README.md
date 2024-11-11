@@ -25,7 +25,7 @@
 
 ## Notes
 
-I nuked the Neopixel on the SKR Pico, but the digital IO still works. External neopixels seem to work fine.
+I nuked the Neopixel on the SKR Pico, but the digital IO pin still works and external neopixels connected to the 3-pin connector seem to work fine.
 
 The magnets that ship with the Formbot kit are not strong enough to hold the door closed through all of the foam and plastic between them. I had some stronger ones that _just_ barely hold the door closed now.
 
@@ -38,6 +38,14 @@ The BTTPi died - several USB ports are fried, the mini CAN bridge seems to have 
 
 ## Procedures
 
+### Auto-hotspot
+
+For taking the printer for a walk.
+
+Source: [Raspberry Pi Auto-hotspot script](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
+
+Credentials are here: https://start.1password.com/open/i?a=UTBHSLJPSZG3RFNHMSM7R33M5Q&v=bc7wt4pxbum4bnpctn4qy644kq&i=yu47wnudfyvpvn2owx57nrqn54&h=camiandgeoff.1password.com
+
 ### Firmware Updates
 
 See [Firmware Update](docs/Firmware_Update.md) docs for instructions on how to update Klipper on this thing.
@@ -47,3 +55,15 @@ See [Firmware Update](docs/Firmware_Update.md) docs for instructions on how to u
 [compact-handles]: https://www.printables.com/model/108428-voron-v0v01v02-compact-handles
 [matchstick-diffusers]: https://www.printables.com/model/408214-matchstick-diffusers
 [mr-hex-mid-panel]: https://thangs.com/designer/MandicReally/3d-model/Voron%20Hex%20Mid%20Panel%20-%20Accent%20your%200.2%21-960156?userName=model&modelIdentifier=960156
+
+### Bed leveling
+
+The front-panel menu has a bed-leveling routine on it. It's a manual `bed_screws_adjust` process.
+
+### Bed Z offset
+
+```gcode
+G28
+G1 X55 Y55 F6000
+Z_ENDSTOP_CALIBRATE
+```
