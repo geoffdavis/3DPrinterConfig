@@ -145,7 +145,11 @@ Verify that the MCU shows up as `/dev/serial/by-id/usb-Klipper_stm32f042x6_08002
 
 ## EBB36 Can Toolhead board
 
-This unit has [katapult](https://github.com/Arksine/katapult) (formerly "Can-boot") installed.
+This unit has [katapult](https://github.com/Arksine/katapult) (formerly "Can-boot") installed. KB-3D has [decent instructions for installing katapult on a fresh board](https://wiki.kb-3d.com/en/home/btt/voron/BTT_EBB36), though you will need to replace all references to `Can-boot` with `katapult`.
+
+NOTE: once `katapult`/`Can-boot` is installed, the device will no longer show up in the output of `lsusb` if you connect it directly to the Pi with a USB cable. It will show up however if you put the device into DFU mode.
+
+The instructions below assume that you've already installed `katapult` and are just upgrading the `klipper` firmware.
 
 ### Step 1 - Verify CAN is working
 
