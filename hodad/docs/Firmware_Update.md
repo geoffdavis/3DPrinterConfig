@@ -58,6 +58,8 @@ Bus 001 Device 022: ID 0483:df11 STMicroelectronics STM Device in DFU Mode
 
 ### Step 2 - Build firmware
 
+This controller has very limited flash memory, and a full-blow Klipper instance won't fit. Be sure to uncheck most of the Optional features as shown below.
+
 Firmware settings:
 
 * Enable extra low-level configuration options
@@ -71,7 +73,10 @@ Firmware settings:
   b. Check `Support LCD devices`
   c. Check `Support external sensor devices`
   d. Uncheck `Support lis2dw 3-axis accelerometer`
-  e. Uncheck `Suppert software based I2C "bit-banging"`
+  e. Uncheck `Support ldc1612 eddy current sensor`
+  f. Uncheck `Support HX711 and HX717 ADC chips`
+  g. Uncheck `Support ADS 1220 ADC chip`
+  e. Uncheck `Support software based I2C "bit-banging"`
   f. Check `Support software based SPI "bit-banging"`
 
 Run `make clean`
@@ -187,16 +192,16 @@ make -j3
 
 ### Step 3: Flash firmware over canbus
 
-The UUID of the board is 12676b53cab4
+The UUID of the board is `2aab98198ff0` (November 2024 was `12676b53cab4` originally)
 
 ```
-python3 ~/katapult/scripts/flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u 12676b53cab4
+python3 ~/katapult/scripts/flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u 2aab98198ff0
 ```
 
 If all goes well, it should look like this:
 
 ```
-python3 ~/katapult/scripts/flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u 12676b53cab4
+python3 ~/katapult/scripts/flash_can.py -i can0 -f ~/klipper/out/klipper.bin -u 2aab98198ff0
 Sending bootloader jump command...
 Resetting all bootloader node IDs...
 Attempting to connect to bootloader
