@@ -1,0 +1,184 @@
+# AGENTS.md - AI Assistant Guide for 3DPrinterConfig
+
+## Project Overview
+
+This repository is a **personal 3D printer configuration backup** for a collection of Klipper-based (and one Marlin-based) 3D printers. It stores Klipper configuration files, macros, documentation, firmware update procedures, and hardware notes for each printer.
+
+This is **not a software project** with a build system, tests, or CI/CD. It is a configuration management repository. Changes should be made carefully because these files directly control physical hardware.
+
+## Repository Structure
+
+```
+3DPrinterConfig/
+├── CLAUDE.md              # This file
+├── README.md              # Top-level overview with printer list
+├── .gitignore             # Ignores *.bkp, .DS_Store
+├── docs/images/           # Shared images (logos, product photos)
+│
+├── voronica/              # Voron v2.4 350mm (ACTIVE - primary printer)
+│   ├── README.md
+│   ├── klipper/           # Klipper config directory
+│   │   ├── printer.cfg    # Main config (includes all modules)
+│   │   ├── moonraker.conf # Moonraker server config
+│   │   ├── macros/        # GCode macro files
+│   │   ├── hotend/        # Hotend configs (swappable)
+│   │   ├── extruder/      # Extruder configs
+│   │   ├── display/       # Display/menu configs
+│   │   ├── lighting/      # LED effect configs
+│   │   ├── sensors/       # Sensor configs (resonance, filament)
+│   │   ├── mmu/           # Happy Hare MMU configuration
+│   │   ├── trad_rack/     # TradRack filament changer configs
+│   │   └── klipper-build/ # MCU firmware build configs
+│   ├── CANBUS/            # CAN bus hardware docs
+│   ├── doc/               # Firmware update procedures, schematics
+│   ├── images/            # Hardware photos
+│   ├── scripts/           # Shell scripts (MCU update)
+│   └── STL/               # Custom 3D-printed parts
+│
+├── hodad/                 # Voron v0.2r1 (ACTIVE)
+│   ├── README.md
+│   ├── klipper/           # Klipper config directory
+│   │   ├── printer.cfg    # Main config
+│   │   ├── macros/        # GCode macros
+│   │   ├── config/        # Modular hardware configs
+│   │   │   ├── extruder/  # Extruder options
+│   │   │   └── hotend/    # Hotend options
+│   │   └── lighting/      # LED effects
+│   └── docs/              # Firmware update docs, BTT Pi notes
+│
+├── limewire/              # Rook MK1 (ACTIVE - minimal config)
+│   └── README.md
+│
+├── smurf/                 # MPMD w/ SKR Pico (RETIRED)
+│   ├── README.md
+│   └── klipper/           # Highly modular config structure
+│       ├── printer.cfg
+│       └── config/        # Organized by component type
+│           ├── boards/    # MCU board definitions
+│           ├── printers/  # Printer-specific (kinematics, steppers)
+│           ├── extruders/ # Extruder definitions
+│           ├── hotends/   # Hotend definitions
+│           ├── macros/    # Macro library
+│           ├── sensors/   # Sensor configs
+│           └── displays/  # Display configs
+│
+├── mpmd/                  # Monoprice MiniDelta stock board (RETIRED)
+│   ├── README.md
+│   └── klipper/printer.cfg
+│
+└── pruscilla/             # Prusa i3 MK3S (RETIRED/SOLD)
+    ├── README.md
+    └── PrusaMarlin/       # Custom Marlin pin definitions
+```
+
+## Active Printers
+
+| Name     | Model             | Mainboard       | Toolhead MCU | Firmware | Web UI   |
+|----------|-------------------|-----------------|-------------|----------|----------|
+| Voronica | Voron 2.4 350mm   | FYSETC Spider 2.2 (CAN bridge) | Mellow SB2040 (CAN) | Klipper | Fluidd/Mainsail |
+| Hodad    | Voron v0.2r1      | BTT SKR Pico    | BTT EBB36 (CAN) | Klipper | Mainsail |
+| Limewire | Rook MK1          | SKR Pico        | N/A         | Klipper  | TBD      |
+
+## Key Technologies
+
+- **Klipper**: Primary firmware for all active printers. Config files are `.cfg` (INI-like format with Jinja2 templating in macros)
+- **Moonraker**: API server for Klipper (`moonraker.conf`)
+- **Fluidd / Mainsail**: Web UIs for printer control
+- **CAN bus**: Used on Voronica (Spider as USB-CAN bridge, SB2040 toolhead) and Hodad (EBB36 toolhead)
+- **Happy Hare (MMU)**: Multi-material unit on Voronica (`mmu/` directory)
+- **KAMP**: Klipper Adaptive Meshing & Purging on Voronica
+- **K-ShakeTune**: Resonance testing/tuning plugin
+- **LED Effects**: klipper-led_effect plugin for Stealthburner and case LEDs
+- **MQTT**: Voronica reports to Home Assistant via MQTT (configured in moonraker.conf)
+- **Katapult/CanBoot**: Bootloader for flashing MCUs over CAN or USB
+
+## Klipper Configuration Conventions
+
+### File Organization
+
+- `printer.cfg` is the **root config** for each printer. It uses `[include]` directives to pull in modular config files.
+- Configs are split by function: macros, hardware (extruder, hotend, sensors), display, lighting.
+- **Swappable hardware**: Hotend and extruder configs are separate files. Comment/uncomment `[include]` lines in `printer.cfg` to switch (e.g., `#[include hotend/revo.cfg]` vs `[include hotend/slice_mosquito_magnum.cfg]`).
+- The `SAVE_CONFIG` block at the bottom of `printer.cfg` is **auto-generated by Klipper**. Never edit it manually. It contains PID tuning, probe offsets, input shaper results, and bed mesh data.
+
+### Macro Conventions
+
+- **Public macros**: UPPER_CASE names (e.g., `PRINT_START`, `PRINT_END`, `HEAT_SOAK`, `CANCEL_HEAT_SOAK`)
+- **Private/helper macros**: Prefixed with underscore `_` (e.g., `_HEATSOAK`, `_CG28`, `_FINALIZE_PRINT`, `_START_STOP_VARS`)
+- **LED macros**: `led_` prefix, lowercase (e.g., `led_heating`, `led_standby`, `led_printing`)
+- **Parameters**: Accessed via `params.NAME|default(value)|type` Jinja2 syntax
+- **GCode comments**: Use `#` for Klipper comments, `;` for GCode-style comments (both work, but `#` is preferred for Klipper-specific lines)
+- **RESPOND MSG**: Used for status messages shown in the web UI during macro execution
+
+### Key Macros (Voronica)
+
+- `PRINT_START`: Called by slicer. Params: `BED`, `HOTEND`, `CHAMBER`, `BEDMESH`, `FORCE_QGL`, `COLORS`
+- `PRINT_END`: Post-print cleanup, parks rear, plays tune
+- `_HEATSOAK` / `HEAT_SOAK`: Bed + chamber heat soak with parking
+- `_CG28`: Conditional home (only homes if not already homed)
+- `G28` (override): Wraps stock G28 with LED status
+- `G32`: Full homing + quad gantry level sequence
+- `clean_nozzle`: Nozzle scrub routine with purge bucket
+
+### Key Macros (Hodad)
+
+- `PRINT_START`: Params: `BED`, `EXTRUDER`, `CHAMBER` (note: uses `EXTRUDER` not `HOTEND`)
+- `PRINT_END` / `CANCEL_PRINT` / `_FINALIZE_PRINT`: Shared cleanup logic
+
+### Board Pin Aliases
+
+- Voronica uses `spider_aliases.cfg` to map symbolic names (e.g., `X_Step`, `HE_BED`, `FAN2`) to physical MCU pins
+- Hodad uses `bigtreetech-skr-pico-v1.0.cfg` for similar pin mapping
+- Voronica's TinyFan board has its own `[board_pins tinyfan]` section in printer.cfg
+
+### .gitignore Patterns
+
+Each printer's `klipper/` directory has its own `.gitignore`:
+- `printer-*.cfg` (Klipper timestamped config backups)
+- `*.bkp` (backup files)
+- `.variables.stb` (saved variables state)
+- `moonraker.conf.backup`
+- `K-ShakeTune_results/` (resonance test output)
+
+## Important Warnings
+
+1. **SAVE_CONFIG blocks**: The section starting with `#*# <---------------------- SAVE_CONFIG ---------------------->` at the end of `printer.cfg` is auto-generated. Do not modify, reorder, or remove entries manually.
+
+2. **Hardware-critical values**: Stepper currents, thermistor types, endstop pins, and probe offsets are tuned for specific hardware. Changing these without understanding the physical setup can damage the printer.
+
+3. **CAN bus UUIDs**: Each CAN device has a unique UUID. These are hardware-specific and must not be changed unless the physical hardware changes.
+
+4. **PID values**: Heater PID tuning (in SAVE_CONFIG block) is calibrated for each specific printer at specific conditions. Do not copy between printers.
+
+5. **Probe offsets**: The `z_offset` for the probe is critical for print quality and bed protection. The value depends on the specific hotend, nozzle, and probe setup.
+
+6. **Credentials**: The hodad README references 1Password for WiFi hotspot credentials. Never commit credentials to this repo.
+
+## Common Tasks for AI Assistants
+
+### When modifying Klipper configs:
+- Read the existing `printer.cfg` and all relevant included files before making changes
+- Maintain the existing include structure; don't inline configurations
+- Preserve comment style (mix of `#` and `;` is intentional and per-printer)
+- Keep the `SAVE_CONFIG` block untouched
+- When adding new macros, follow the underscore convention for private helpers
+- Test macro Jinja2 syntax carefully - missing `{% endif %}` or bad filters will prevent Klipper from starting
+
+### When modifying documentation:
+- Each printer has its own `README.md` with hardware details and procedures
+- Firmware update procedures are in `doc/Firmware_Update.md` (per printer)
+- Link references use standard Markdown
+
+### When adding a new printer:
+- Create a new top-level directory named after the printer
+- Add a `README.md` with overview, modifications, and links
+- Create a `klipper/` subdirectory with `printer.cfg` and modular includes
+- Add appropriate `.gitignore` entries in the klipper directory
+- Update the root `README.md` printer table
+
+## Git Workflow
+
+- Single `master` branch for the canonical configuration state
+- Commits are descriptive, typically describing what changed and on which printer
+- No CI/CD, no automated testing (configs are validated by Klipper on the printers themselves)
+- Commit messages are short, imperative style (e.g., "Switch from printed tap to CNC v2 tap", "Update Happy Hare")
