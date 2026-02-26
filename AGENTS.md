@@ -46,7 +46,7 @@ This is **not a software project** with a build system, tests, or CI/CD. It is a
 │   │   └── lighting/      # LED effects
 │   └── docs/              # Firmware update docs, BTT Pi notes
 │
-├── limewire/              # Rook MK1 (ACTIVE - minimal config)
+├── limewire/              # Rook MK1 (RETIRED)
 │   └── README.md
 │
 ├── smurf/                 # MPMD w/ SKR Pico (RETIRED)
@@ -77,7 +77,6 @@ This is **not a software project** with a build system, tests, or CI/CD. It is a
 |----------|-------------------|-----------------|-------------|----------|----------|
 | Voronica | Voron 2.4 350mm   | FYSETC Spider 2.2 (CAN bridge) | Mellow SB2040 (CAN) | Klipper | Fluidd/Mainsail |
 | Hodad    | Voron v0.2r1      | BTT SKR Pico    | BTT EBB36 (CAN) | Klipper | Mainsail |
-| Limewire | Rook MK1          | SKR Pico        | N/A         | Klipper  | TBD      |
 
 ## Key Technologies
 

@@ -1,8 +1,8 @@
-# Limewire
+# Limewire (RETIRED)
 
 ## About
 
-Rook Mk1 with take-offs from Voron v0 and the MPMD.
+Rook Mk1 with take-offs from Voron v0 and the MPMD. **Retired.**
 
 ## Components
 
