@@ -1,19 +1,21 @@
-# Voron v0.2r1 "Hodad"
+# Hodad - Voron v0.2r1
 
 ## Overview
 
 * Formbot Voron v0.2R1 kit.
-* Minor mods installed for lighting.
-* Running a Revo Voron hotend
-* CAN Toolhead
-* BTT Pi from kit died, running Raspberry Pi 4.
+* BTT SKR Pico mainboard
+* BTT EBB36 CAN toolhead
+* Revo Voron hotend with higher watt heater
+* LDO Orbiter 2.0 extruder with ministealthorbiter toolhead
+* Mainsail web UI
+* Raspberry Pi 4 (BTT Pi from kit died)
 
 ## Modifications
 
-* EBB36 CAN toolhead
+* [EBB36 CAN toolhead][ebb36]
 * Daylight on a matchstick, using Pico hotend heater port
 * Revo VORON with higher watt heater
-* full-width [DIN rail mount][DIN-mount] for Raspberry Pi, SKR Pico, and Mellow Fly UTOC
+* Full-width [DIN rail mount][DIN-mount] for Raspberry Pi, SKR Pico, and Mellow Fly UTOC
 * DS18B20 one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico (no longer necessary with EBB36 but it's already installed.)
 * Mapleleafmaker's [Stealth handles][stealth-handles] on the sides
 * loicloic's [Voron V0/V0.1/V0.2 Compact Handles][compact-handles] - single one only, on front of tophat to help open it.
@@ -46,15 +48,9 @@ Source: [Raspberry Pi Auto-hotspot script](https://www.raspberryconnect.com/proj
 
 Credentials are here: https://start.1password.com/open/i?a=UTBHSLJPSZG3RFNHMSM7R33M5Q&v=bc7wt4pxbum4bnpctn4qy644kq&i=yu47wnudfyvpvn2owx57nrqn54&h=camiandgeoff.1password.com
 
-### Firmware Updates
+### Firmware updates
 
 See [Firmware Update](docs/Firmware_Update.md) docs for instructions on how to update Klipper on this thing.
-
-[DIN-mount]: https://www.printables.com/model/381062-voron-v01-v02-din-rail-board-mounting-system
-[stealth-handles]: https://www.printables.com/model/481575-v0-stealth-handles
-[compact-handles]: https://www.printables.com/model/108428-voron-v0v01v02-compact-handles
-[matchstick-diffusers]: https://www.printables.com/model/408214-matchstick-diffusers
-[mr-hex-mid-panel]: https://thangs.com/designer/MandicReally/3d-model/Voron%20Hex%20Mid%20Panel%20-%20Accent%20your%200.2%21-960156?userName=model&modelIdentifier=960156
 
 ### Bed leveling
 
@@ -67,3 +63,10 @@ G28
 G1 X55 Y55 F6000
 Z_ENDSTOP_CALIBRATE
 ```
+
+[ebb36]: https://github.com/bigtreetech/EBB
+[DIN-mount]: https://www.printables.com/model/381062-voron-v01-v02-din-rail-board-mounting-system
+[stealth-handles]: https://www.printables.com/model/481575-v0-stealth-handles
+[compact-handles]: https://www.printables.com/model/108428-voron-v0v01v02-compact-handles
+[matchstick-diffusers]: https://www.printables.com/model/408214-matchstick-diffusers
+[mr-hex-mid-panel]: https://thangs.com/designer/MandicReally/3d-model/Voron%20Hex%20Mid%20Panel%20-%20Accent%20your%200.2%21-960156?userName=model&modelIdentifier=960156
