@@ -10,7 +10,7 @@ This is **not a software project** with a build system, tests, or CI/CD. It is a
 
 ```
 3DPrinterConfig/
-├── CLAUDE.md              # This file
+├── CLAUDE.md              # Claude Code compatibility wrapper
 ├── README.md              # Top-level overview with printer list
 ├── .gitignore             # Ignores *.bkp, .DS_Store
 ├── docs/images/           # Shared images (logos, product photos)
@@ -30,7 +30,7 @@ This is **not a software project** with a build system, tests, or CI/CD. It is a
 │   │   ├── trad_rack/     # TradRack filament changer configs
 │   │   └── klipper-build/ # MCU firmware build configs
 │   ├── CANBUS/            # CAN bus hardware docs
-│   ├── doc/               # Firmware update procedures, schematics
+│   ├── docs/              # Firmware update procedures, schematics
 │   ├── images/            # Hardware photos
 │   ├── scripts/           # Shell scripts (MCU update)
 │   └── STL/               # Custom 3D-printed parts
