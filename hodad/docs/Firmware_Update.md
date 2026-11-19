@@ -2,7 +2,44 @@
 
 ## SKR Pico
 
-This MCU is connected via UART, updates must be done over USB.
+This MCU is connected via UART (`/dev/serial0`, 250000 baud). Since
+2026-11-19 it runs [Katapult](https://github.com/Arksine/katapult) as a
+16 KiB bootloader, so **Klipper updates no longer need the boot jumper**.
+
+### Updating Klipper (jumper-free)
+
+Klipper menuconfig:
+
+* Enable extra low-level configuration options
+* Micro-controller Architecture: `Raspberry Pi RP2040/RP235x`, processor `rp2040`
+* Bootloader offset: `16KiB bootloader`
+* Communication interface: `UART0 on GPIO0/GPIO1`, baud `250000`
+
+```
+make clean && make -j4
+sudo systemctl stop klipper
+python3 ~/katapult/scripts/flashtool.py -d /dev/serial0 -b 250000 -f out/klipper.bin
+sudo systemctl start klipper
+```
+
+`flashtool.py` asks the running Klipper to jump into Katapult, then flashes.
+Always pass `-f`: without it the tool reads `~/klipper/out/klipper.bin`,
+which may be another MCU's build, and refuses on the MCU-type mismatch.
+
+If the Pico ever sits in Katapult with no working app, **double-press the
+reset button** to enter Katapult by hand, then run the same `flashtool.py`.
+
+### Katapult itself (one-time, jumper needed)
+
+Built with `MACH_RP2040`, "Do not build" deployer, `UART0 on GPIO0/GPIO1`,
+baud `250000`, double-reset enabled. Written with the steps below (boot jumper
++ USB cable), using
+`sudo ~/katapult/lib/rp2040_flash/rp2040_flash out/katapult.withclear.uf2`
+in place of step 3. Only needed again if Katapult itself must be replaced.
+
+### Legacy: flashing without Katapult
+
+The original jumper procedure, kept for Katapult reinstalls.
 
 ### Step 1: Get unit in DFU mode
 Connect USB-A-M to USB-C-M cable between host and MCU
