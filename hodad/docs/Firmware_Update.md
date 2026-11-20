@@ -7,7 +7,7 @@
 > ```sh
 > sudo klipper-flash-mcu       # SKR Pico, Katapult over /dev/serial0
 > sudo klipper-flash-EBBCan    # EBB36, Katapult over can0
-> sudo klipper-flash-display   # V0 display, ROM DFU: BOOT0 jumper first
+> sudo klipper-flash-display   # V0 display, Katapult over USB
 > ```
 >
 > How that works, what replaced KIAUH, and how a Klipper update rolls out:
@@ -91,9 +91,46 @@ Remove the boot jumper to the right of the power LED. Optionally, press the rese
 
 ## v0 Display board
 
-This unit is connected via USB.
+This unit is connected via USB. Since 2026-11-20 it runs
+[Katapult](https://github.com/Arksine/katapult) as an 8 KiB bootloader, so
+**Klipper updates no longer need the boot jumper** (the stock Klipper
+ignored the reboot-to-DFU request, so every flash used to need it).
 
 Docs: [https://github.com/VoronDesign/Voron-Hardware/blob/master/V0_Display/Documentation/Setup_and_Flashing_Guide.md]
+
+### Updating Klipper (jumper-free)
+
+On NixOS: `sudo klipper-flash-display`. By hand, Klipper menuconfig as in
+Step 2 below but with Bootloader offset `8KiB bootloader`, then:
+
+```
+sudo systemctl stop klipper
+python3 flashtool.py -d /dev/serial/by-id/usb-Klipper_stm32f042x6_05001A000643564E32313720-if00 -r
+sleep 3
+python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f042x6_05001A000643564E32313720-if00 -f out/klipper.bin
+sudo systemctl start klipper
+```
+
+Request and flash as two calls: in one call the CONNECT goes out too soon
+after the board re-enumerates, Katapult never answers, and on hodad that
+also knocked the CAN adapter (same USB hub) off the bus until its power was
+cycled.
+
+### Katapult itself (one-time, jumper needed)
+
+Built with `MACH_STM32F042`, "Do not build" deployer, internal clock,
+`USB (on PA9/PA10)`, double-reset enabled (nix-personal
+`hosts/hodad/firmware/v0-display-katapult.config`). Installed with
+`sudo klipper-install-katapult-display` after the jumper steps below; it
+mass-erases the chip and writes Katapult at `0x8000000`. The ROM's DFU
+"leave" did not start Katapult here: remove the jumper, reset, and the
+board comes up as `usb-katapult_...` (no app behind it yet), ready for
+`sudo klipper-flash-display`. Only needed again if Katapult itself must be
+replaced.
+
+### Legacy: flashing without Katapult
+
+The original jumper procedure, kept for Katapult reinstalls.
 
 ### Step 1 - DFU mode
 
