@@ -1,5 +1,23 @@
 # Hodad Klipper Firmware Update Procedures
 
+> **hodad runs NixOS now (since 2026-11).** Nix builds every MCU's firmware
+> from the same pinned Klipper as the host, and flashing is one command per
+> MCU, run on hodad with the printer idle and cool:
+>
+> ```sh
+> sudo klipper-flash-mcu       # SKR Pico, Katapult over /dev/serial0
+> sudo klipper-flash-EBBCan    # EBB36, Katapult over can0
+> sudo klipper-flash-display   # V0 display, ROM DFU: BOOT0 jumper first
+> ```
+>
+> How that works, what replaced KIAUH, and how a Klipper update rolls out:
+> [nix-personal `docs/klipper-printers.md`](https://github.com/geoffdavis/nix-personal/blob/main/docs/klipper-printers.md).
+> The Kconfig files the builds use live in nix-personal
+> `hosts/hodad/firmware/`. The manual `make menuconfig` / `flashtool.py`
+> procedures below are the Raspberry Pi OS way; they still describe the
+> boards (bootloaders, jumpers, offsets) and are the fallback for
+> reinstalling a bootloader.
+
 ## SKR Pico
 
 This MCU is connected via UART (`/dev/serial0`, 250000 baud). Since
