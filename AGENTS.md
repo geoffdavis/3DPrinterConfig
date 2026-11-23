@@ -44,7 +44,7 @@ This is **not a software project** with a build system, tests, or CI/CD. It is a
 │   │   │   ├── extruder/  # Extruder options
 │   │   │   └── hotend/    # Hotend options
 │   │   └── lighting/      # LED effects
-│   └── docs/              # Firmware update docs, BTT Pi notes
+│   └── docs/              # Firmware update docs
 │
 ├── limewire/              # Rook MK1 (RETIRED)
 │   └── README.md
