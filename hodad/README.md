@@ -8,7 +8,7 @@
 * Revo Voron hotend with higher watt heater
 * LDO Orbiter 2.0 extruder with ministealthorbiter toolhead
 * Mainsail web UI
-* Raspberry Pi 4 (BTT Pi from kit died)
+* Raspberry Pi 4
 
 ## Modifications
 
@@ -16,22 +16,19 @@
 * Daylight on a matchstick, using Pico hotend heater port
 * Revo VORON with higher watt heater
 * Full-width [DIN rail mount][DIN-mount] for Raspberry Pi, SKR Pico, and Mellow Fly UTOC
-* DS18B20 one-wire thermistor hooked up to BTT Pi to work around lack of extra Analog thermistor ports on the SKR Pico (no longer necessary with EBB36 but it's already installed.)
+* DS18B20 one-wire thermistor on the Pi's GPIO to work around lack of extra Analog thermistor ports on the SKR Pico (no longer necessary with EBB36 but it's already installed.)
 * Mapleleafmaker's [Stealth handles][stealth-handles] on the sides
 * loicloic's [Voron V0/V0.1/V0.2 Compact Handles][compact-handles] - single one only, on front of tophat to help open it.
 * Mapleleafmaker's Daylight on a [Matchstick diffusers][matchstick-diffusers]
 * Mapleleafmaker's [Upper Rear Bowden Inlet for BTT SFS 2.0](https://www.printables.com/model/408745-v0-upper-rear-bowden-inlet-urbi)
 * MandicReally's [Voron Hex Mid panel][mr-hex-mid-panel]
 * LDO Orbiter 2.0 extruder with ministealthorbiter toolhead
-* Raspberry Pi 4 instead of BTT Pi
 
 ## Notes
 
 I nuked the Neopixel on the SKR Pico, but the digital IO pin still works and external neopixels connected to the 3-pin connector seem to work fine.
 
 The magnets that ship with the Formbot kit are not strong enough to hold the door closed through all of the foam and plastic between them. I had some stronger ones that _just_ barely hold the door closed now.
-
-The BTTPi died - several USB ports are fried, the mini CAN bridge seems to have flaked out. Using a RPi4 now. See also my old [notes for working with the BTT Pi.](docs/BTT_Pi.md)
 
 ## Links
 
